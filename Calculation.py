@@ -39,25 +39,28 @@ class Calculation:
         [1500, 345, 0.01],  # flatLandFlatLineDecline
         [1000, 0, 0.01],  # FlatLand1
         [1500, 10, 0.01]]  # FlatLand2
-    
+
     mass = 3000
     gravity = 9.8
     fGravity = mass * gravity
 
     def calcNormalForceTrack(distance, angle, angleIncrementation):
         fNormal = []
+
         for i in range(distance):
             angle_rad = math.radians(angle)
-            fNormal[i] = math.cos(angle_rad) * (-Calculation.fGravity)
+            fNormal.append(math.cos(angle_rad) * (-Calculation.fGravity))
             angle += angleIncrementation
+
         return fNormal
 
     def calcNormalForceLoop(velocity, radius, mass):
         fNormal = []
-        velocity = math.sqrt(velocity)
+
         for i in range(radius):
             fNormal.append(((((mass * math.pow(velocity, 2)) /
                               radius) + Calculation.fGravity)))
+
         return fNormal
 
     def getNormalForce():
@@ -93,8 +96,10 @@ def main():
     fNormal = cal.getNormalForce()
     fFriction = cal.getFrictionForce()
 
-    plt.plot([fNormal], color="Blue")
-    plt.plot([fFriction], color="Red")
+    ax = plt
+
+    ax.plot([fNormal], color="Blue")
+    ax.plot([fFriction], color="Red")
     plt.show()
 
 
