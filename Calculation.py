@@ -49,44 +49,47 @@ class Calculation:
 
         for i in range(distance):
             angle_rad = math.radians(angle)
-            fNormal.append(math.cos(angle_rad) * (-Calculation.fGravity))
+            fNormal.append(math.cos(angle_rad) * (-self.fGravity))
             angle += angleIncrementation
 
         return fNormal
 
-    def calcNormalForceLoop(self, velocity, radius, mass):
+    def calcNormalForceLoop(self, velocity, radius):
         fNormal = []
 
         for i in range(radius):
-            fNormal.append(((((mass * math.pow(velocity, 2)) /
-                              radius) + Calculation.fGravity)))
+            fNormal.append(((((self.mass * math.pow(velocity, 2)) /
+                              radius) + self.fGravity)))
 
         return fNormal
 
     def getNormalForce(self):
         fNormal = []
-        for i in range(len(Calculation.rollercoaster)):
-            fNormalTrack = Calculation.calcNormalForceTrack(
-                Calculation.rollercoaster[i][0], Calculation.rollercoaster[i][1], Calculation.rollercoaster[i][2])
-            fNormalLoop = Calculation.calcNormalForceLoop(
-                Calculation.rollercoaster[i][0], Calculation.rollercoaster[i][1], Calculation.rollercoaster[i][2])
-            fNormal.append(fNormalTrack)
-            fNormal.append(fNormalLoop)
+
+        for i in range(len(self.rollercoaster)):
+
+            if (self.rollercoaster[i][2] != 3000):
+                fNormalTrack = self.calcNormalForceTrack(
+                    self.rollercoaster[i][0], self.rollercoaster[i][1], self.rollercoaster[i][2])
+                fNormal.append(fNormalTrack)
+
+            else:
+                fNormalLoop = self.calcNormalForceLoop(
+                    self.rollercoaster[i][0], self.rollercoaster[i][1])
+                fNormal.append(fNormalLoop)
+
         return fNormal
 
     def getFrictionForce(self, frictionCoefficient):
-        fNormal = []
-        fFriction = []
-        for i in range(len(Calculation.rollercoaster)):
-            fNormal.append(Calculation.getNormalForce())
-            fFriction.append(Calculation.calcFrictionForce(
-                fNormal, frictionCoefficient))
+        fNormal_np = np.array(self.getNormalForce())
+        fFriction_np = np.multiply(fNormal_np, frictionCoefficient)
+        fFriction = fFriction_np.tolist()
 
         return fFriction
 
-
 # def getVelocity(distance):
 # def getAirResistenece (vIntial, dragCoeff, dim1, dim2, mass, distance):
+
 
 def main():
 
