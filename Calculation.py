@@ -44,7 +44,7 @@ class Calculation:
     gravity = 9.8
     fGravity = mass * gravity
 
-    def calcNormalForceTrack(distance, angle, angleIncrementation):
+    def calcNormalForceTrack(self, distance, angle, angleIncrementation):
         fNormal = []
 
         for i in range(distance):
@@ -54,7 +54,7 @@ class Calculation:
 
         return fNormal
 
-    def calcNormalForceLoop(velocity, radius, mass):
+    def calcNormalForceLoop(self, velocity, radius, mass):
         fNormal = []
 
         for i in range(radius):
@@ -63,7 +63,7 @@ class Calculation:
 
         return fNormal
 
-    def getNormalForce():
+    def getNormalForce(self):
         fNormal = []
         for i in range(len(Calculation.rollercoaster)):
             fNormalTrack = Calculation.calcNormalForceTrack(
@@ -74,16 +74,15 @@ class Calculation:
             fNormal.append(fNormalLoop)
         return fNormal
 
+    def getFrictionForce(self, frictionCoefficient):
+        fNormal = []
+        fFriction = []
+        for i in range(len(Calculation.rollercoaster)):
+            fNormal.append(Calculation.getNormalForce())
+            fFriction.append(Calculation.calcFrictionForce(
+                fNormal, frictionCoefficient))
 
-def getFrictionForce(frictionCoefficient):
-    fNormal = []
-    fFriction = []
-    for i in range(len(Calculation.rollercoaster)):
-        fNormal.append(Calculation.getNormalForce())
-        fFriction.append(Calculation.calcFrictionForce(
-            fNormal, frictionCoefficient))
-
-    return fFriction
+        return fFriction
 
 
 # def getVelocity(distance):
@@ -94,7 +93,7 @@ def main():
     cal = Calculation()
 
     fNormal = cal.getNormalForce()
-    fFriction = cal.getFrictionForce()
+    fFriction = cal.getFrictionForce(0.4)
 
     ax = plt
 
