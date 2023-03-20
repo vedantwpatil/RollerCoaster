@@ -81,15 +81,16 @@ class Calculation:
         return fNormal
 
     def getFrictionForce(self, frictionCoefficient):
-        fNormal = self.getNormalForce()
+
+        fNormal = np.ndarray()
         fFriction = []
         for i in fNormal:
-            fFriction.append(i * frictionCoefficient)
+            fFriction = float(fNormal[i]) * frictionCoefficient
 
         return fFriction
 
-# def getVelocity(distance):
-# def getAirResistenece (vIntial, dragCoeff, dim1, dim2, mass, distance):
+# def getVelocity(self, distance):
+# def getAirResistenece (self, vIntial, dragCoeff, dim1, dim2, mass, distance):
 
 
 def main():
@@ -99,11 +100,13 @@ def main():
     fNormal = cal.getNormalForce()
     fFriction = cal.getFrictionForce(0.4)
 
-    ax = plt
+    print(fNormal)
+    print(fFriction)
+    # ax = plt
 
-    ax.plot([fNormal], color="Blue")
-    ax.plot([fFriction], color="Red")
-    plt.show()
+    # ax.plot([fNormal], color="Blue")
+    # ax.plot([fFriction], color="Red")
+    # plt.show()
 
 
 main()
