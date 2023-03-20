@@ -1,8 +1,4 @@
 import math
-import matplotlib as mpl
-import matplotlib.pyplot as plt
-import numpy as np
-
 
 class Calculation:
     rollercoaster = [
@@ -82,7 +78,7 @@ class Calculation:
 
     def getFrictionForce(self, frictionCoefficient):
 
-        fNormal = np.ndarray()
+        fNormal = self.getNormalForce()
         fFriction = []
         for i in fNormal:
             fFriction = float(fNormal[i]) * frictionCoefficient
@@ -100,8 +96,6 @@ def main():
     fNormal = cal.getNormalForce()
     fFriction = cal.getFrictionForce(0.4)
 
-    print(fNormal)
-    print(fFriction)
     # ax = plt
 
     # ax.plot([fNormal], color="Blue")
