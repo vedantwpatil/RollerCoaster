@@ -81,9 +81,10 @@ class Calculation:
         return fNormal
 
     def getFrictionForce(self, frictionCoefficient):
-        fNormal_np = np.array(self.getNormalForce())
-        fFriction_np = np.multiply(fNormal_np, frictionCoefficient)
-        fFriction = fFriction_np.tolist()
+        fNormal = self.getNormalForce()
+        fFriction = []
+        for i in fNormal:
+            fFriction.append(i * frictionCoefficient)
 
         return fFriction
 
