@@ -1,5 +1,4 @@
 import math
-import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -101,11 +100,9 @@ def main():
     fNormal = cal.getNormalForce()
     fFriction = cal.getFrictionForce(0.4)
 
-    ax = plt
-
+    fig, ax = plt.subplots()
+    ax.plot(fNormal)
     plt.show()
-    ax.plot([fNormal], color="Blue")
-    ax.plot([fFriction], color="Red")
 
 
 main()
