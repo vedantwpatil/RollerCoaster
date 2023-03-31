@@ -1,9 +1,14 @@
 import math
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+import numpy as np
+
 
 class Calculation:
-    rollercoaster = [
-        # Rollercoaster is brought up a steep incline by a lift
-        # Flatline before the drop * /
+
+    # Rollercoaster is brought up a steep incline by a lift
+    # Flatline before the drop
+    rollercoaster = np.array([
         [2000, 0, 0],  # Drop and then decline to 326 degrees
         [3274, 300, -0.001],  # Flatline before into a loop
         [20226, 326, 0],  # Incline to 360/0 degrees
@@ -34,7 +39,7 @@ class Calculation:
         [735, 95, 3000],  # Loop4
         [1500, 345, 0.01],  # flatLandFlatLineDecline
         [1000, 0, 0.01],  # FlatLand1
-        [1500, 10, 0.01]]  # FlatLand2
+        [1500, 10, 0.01]])  # FlatLand2
 
     mass = 3000
     gravity = 9.8
@@ -43,7 +48,7 @@ class Calculation:
     def calcNormalForceTrack(self, distance, angle, angleIncrementation):
         fNormal = []
 
-        for i in range(distance):
+        for i in range(int(distance)):
             angle_rad = math.radians(angle)
             fNormal.append(math.cos(angle_rad) * (-self.fGravity))
             angle += angleIncrementation
@@ -53,7 +58,7 @@ class Calculation:
     def calcNormalForceLoop(self, velocity, radius):
         fNormal = []
 
-        for i in range(radius):
+        for i in range(int(radius)):
             fNormal.append(((((self.mass * math.pow(velocity, 2)) /
                               radius) + self.fGravity)))
 
@@ -81,7 +86,7 @@ class Calculation:
         fNormal = self.getNormalForce()
         fFriction = []
         for i in fNormal:
-            fFriction = float(fNormal[i]) * frictionCoefficient
+            fFriction = float(i) * frictionCoefficient
 
         return fFriction
 
@@ -96,11 +101,11 @@ def main():
     fNormal = cal.getNormalForce()
     fFriction = cal.getFrictionForce(0.4)
 
-    # ax = plt
+    ax = plt
 
-    # ax.plot([fNormal], color="Blue")
-    # ax.plot([fFriction], color="Red")
-    # plt.show()
+    plt.show()
+    ax.plot([fNormal], color="Blue")
+    ax.plot([fFriction], color="Red")
 
 
 main()
