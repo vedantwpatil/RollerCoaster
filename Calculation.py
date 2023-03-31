@@ -82,13 +82,13 @@ class Calculation:
         return fNormal
 
     def getFrictionForce(self, frictionCoefficient):
-
         fNormal = self.getNormalForce()
         fFriction = []
-        for i in fNormal:
-            fFriction = float(i) * frictionCoefficient
-
+        for sublist in fNormal:
+            for i in sublist:
+                fFriction.append(float(i) * frictionCoefficient)
         return fFriction
+
 
 # def getVelocity(self, distance):
 # def getAirResistenece (self, vIntial, dragCoeff, dim1, dim2, mass, distance):
